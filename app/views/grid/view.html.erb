@@ -1,0 +1,23 @@
+<!-- Get desired dimension for a new grid and submit it -->
+<%= form_for :dimension, method: 'get', url: root_path do |f| %>
+
+    <p>
+    <%= f.label :X %><br>
+    <%= f.number_field :dimensionx %>
+    </p>
+    <p>
+    <%= f.label :Y %><br>
+    <%= f.number_field :dimensiony %>
+    </p>
+    <p>
+      <%= f.submit %>
+    </p>
+    <% end %>
+<% count = 0 %>
+<% Grid.all.each do |grid| %>
+    <% if grid.x > count %>
+        <br/>
+    <% end %>
+    <% count = grid.x %>
+      X
+<% end %>

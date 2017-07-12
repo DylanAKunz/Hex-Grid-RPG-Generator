@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  grid: 1
+  terrain: MyString
+  name: MyString
+  note: MyString
+  type: 
+  difficulty: 1
+
+two:
+  grid: 1
+  terrain: MyString
+  name: MyString
+  note: MyString
+  type: 
+  difficulty: 1
