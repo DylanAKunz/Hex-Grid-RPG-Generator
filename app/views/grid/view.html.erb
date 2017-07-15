@@ -12,12 +12,20 @@
     <p>
       <%= f.submit %>
     </p>
-    <% end %>
-<% count = 0 %>
-<% Grid.all.each do |grid| %>
-    <% if grid.x > count %>
-        <br/>
-    <% end %>
-    <% count = grid.x %>
-      X
 <% end %>
+<div id="grid">
+  <% count = 0 %>
+  <div class="column">
+  <% Grid.all.each do |grid| %>
+      <% if count >= grid.y %>
+          </div><div class="column">
+      <% end %>
+      <% count = grid.y %>
+      <% if grid.y%2.floor != 0 %>
+          <div class="hexagon odd"></div>
+      <% else %>
+          <div class="hexagon even"></div>
+      <% end %>
+  <% end %>
+  </div>
+</div>
