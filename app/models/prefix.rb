@@ -1,0 +1,2 @@
+class Prefix < ApplicationRecord
+end

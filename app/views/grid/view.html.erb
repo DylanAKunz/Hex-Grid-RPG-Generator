@@ -22,9 +22,17 @@
       <% end %>
       <% count = grid.y %>
       <% if grid.y%2.floor != 0 %>
-          <div class="hexagon odd"></div>
+          <div class="hexagon odd">
+            <div class="hex-text">
+              <%= grid.x%>,<%= grid.y%>
+            </div>
+          </div>
       <% else %>
-          <div class="hexagon even"></div>
+          <div class="hexagon even">
+            <div class="hex-text">
+              ^^^
+            </div>
+          </div>
       <% end %>
   <% end %>
   </div>

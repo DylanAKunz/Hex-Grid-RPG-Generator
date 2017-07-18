@@ -1,0 +1,2 @@
+class Suffix < ApplicationRecord
+end

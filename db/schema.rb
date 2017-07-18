@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170704215819) do
+ActiveRecord::Schema.define(version: 20170718124341) do
+
+  create_table "affinities", force: :cascade do |t|
+    t.string "affinity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "grids", force: :cascade do |t|
     t.integer "x"
@@ -19,13 +25,41 @@ ActiveRecord::Schema.define(version: 20170704215819) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "infos", force: :cascade do |t|
-    t.integer "grid"
+  create_table "prefixes", force: :cascade do |t|
+    t.string "prefix"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "suffixes", force: :cascade do |t|
+    t.string "suffix"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "terrains", force: :cascade do |t|
     t.string "terrain"
-    t.string "name"
-    t.string "note"
     t.string "type"
-    t.integer "difficulty"
+    t.integer "color"
+    t.integer "hover"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tiles", force: :cascade do |t|
+    t.integer "x"
+    t.integer "y"
+    t.string "name"
+    t.string "terrain"
+    t.string "affinity"
+    t.integer "height"
+    t.integer "threat"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "types", force: :cascade do |t|
+    t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,0 +1,2 @@
+class Affinity < ApplicationRecord
+end
