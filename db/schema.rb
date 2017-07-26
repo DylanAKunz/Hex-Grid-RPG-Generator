@@ -18,13 +18,6 @@ ActiveRecord::Schema.define(version: 20170718124341) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "grids", force: :cascade do |t|
-    t.integer "x"
-    t.integer "y"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "prefixes", force: :cascade do |t|
     t.string "prefix"
     t.datetime "created_at", null: false
@@ -39,7 +32,7 @@ ActiveRecord::Schema.define(version: 20170718124341) do
 
   create_table "terrains", force: :cascade do |t|
     t.string "terrain"
-    t.string "type"
+    t.string "generation_type"
     t.integer "color"
     t.integer "hover"
     t.datetime "created_at", null: false
@@ -59,7 +52,7 @@ ActiveRecord::Schema.define(version: 20170718124341) do
   end
 
   create_table "types", force: :cascade do |t|
-    t.string "type"
+    t.string "generate_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

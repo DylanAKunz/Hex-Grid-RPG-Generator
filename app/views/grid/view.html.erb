@@ -12,25 +12,26 @@
     <p>
       <%= f.submit %>
     </p>
+    <%= @meme %>
 <% end %>
 <div id="grid">
   <% count = 0 %>
   <div class="column">
-  <% Grid.all.each do |grid| %>
-      <% if count >= grid.y %>
+  <% Tile.all.each do |tile| %>
+      <% if count >= tile.y %>
           </div><div class="column">
       <% end %>
-      <% count = grid.y %>
-      <% if grid.y%2.floor != 0 %>
-          <div class="hexagon odd">
+      <% count = tile.y %>
+      <% if tile.y%2.floor != 0 %>
+          <div class="hexagon odd <%= tile.terrain %>">
             <div class="hex-text">
-              <%= grid.x%>,<%= grid.y%>
+              <%= tile.terrain %>
             </div>
           </div>
       <% else %>
-          <div class="hexagon even">
+          <div class="hexagon even <%= tile.terrain %>">
             <div class="hex-text">
-              ^^^
+                <%= tile.terrain %>
             </div>
           </div>
       <% end %>

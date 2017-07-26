@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails hex-grid: development" uuid="cdb9bde9-75b1-4166-a9f8-f66b99b5369c">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <auth-required>false</auth-required>
+      <first-sync>true</first-sync>
+      <introspection-schemas>*:</introspection-schemas>
+    </data-source>
+    <data-source name="development.sqlite3" uuid="8631fa61-6388-4983-a9d2-fcc716ea5fec">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <secret-storage>master_key</secret-storage>
+      <auth-required>false</auth-required>
+      <first-sync>true</first-sync>
+      <introspection-schemas>*</introspection-schemas>
+      <legacy-introspector>true</legacy-introspector>
+    </data-source>
+  </component>
+</project>
