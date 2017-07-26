@@ -17,16 +17,10 @@
     display: inline-block;
 }
 
-.hexagon:hover
-{
-    background-color: #666666;
-}
-
 .hexagon {
     position: relative;
     width: 60px;
     height: 34.64px;
-    background-color: #64C7CC;
     margin: 17.32px 0;
     border-left: solid 1px #333333;
     border-right: solid 1px #333333;

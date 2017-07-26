@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 20170718124341) do
   create_table "terrains", force: :cascade do |t|
     t.string "terrain"
     t.string "generation_type"
-    t.integer "color"
-    t.integer "hover"
+    t.string "color"
+    t.string "hover"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

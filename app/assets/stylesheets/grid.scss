@@ -1,3 +1,36 @@
-// Place all the styles related to the grid controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.Mountain{
+background-color: #acaebe
+}
+.Mountain:hover{
+background-color: #9b9cab
+}
+.River{
+background-color: #3e4ddd
+}
+.River:hover{
+background-color: #3542d4
+}
+.Plains{
+background-color: #d6dd8a
+}
+.Plains:hover{
+background-color: #cbd281
+}
+.City{
+background-color: #717177
+}
+.City:hover{
+background-color: #5c5d61
+}
+.town{
+background-color: #88c57e
+}
+.town:hover{
+background-color: #679260
+}
+.hill{
+background-color: #bc9c76
+}
+.hill:hover{
+background-color: #9d8161
+}

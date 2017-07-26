@@ -3,8 +3,8 @@ class CreateTerrains < ActiveRecord::Migration[5.1]
     create_table :terrains do |t|
       t.string :terrain
       t.string :generation_type
-      t.integer :color
-      t.integer :hover
+      t.string :color
+      t.string :hover
 
       t.timestamps
     end
