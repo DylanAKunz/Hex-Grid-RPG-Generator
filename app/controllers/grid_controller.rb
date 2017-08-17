@@ -1,7 +1,9 @@
 class GridController < ApplicationController
+  #This controller is designed to accept user input in the form of two positive integers and create a map through several stages of generation(Mountain, river, forest, city)
   def view
     #Checks if there are parameters set, if so create a new grid
     if defined? params[:dimension][:commit]
+      #Dimensionx is the users input for the x dimensions of the map, dimension y for the y
       generate(params[:dimension][:dimensionx], params[:dimension][:dimensiony])
     end
   end
@@ -13,8 +15,8 @@ class GridController < ApplicationController
   end
 
   def generate(dimensionx, dimensiony)
-    #generates a grid based on
-    #Temporary location for creating the color of a tile based on its color in the database.  In the future will allow for custom created tiles
+    #generates a grid based on user provided dimensions
+    #Temporary location for creating the color of a tile based on its color in the database and writing it to a stylesheet.  In the future will allow for custom created tiles
     directory = 'app/assets/stylesheets/'
     File.truncate(directory + 'grid.scss', 0)
     File.open(File.join(directory, 'grid.scss'), 'w') do |f|
@@ -26,6 +28,7 @@ class GridController < ApplicationController
         f.puts 'background-color: #' + terrain.hover.to_s
         f.puts '}'
       end
+     f.close
     end
 
     base_type = Terrain.order("RANDOM()").first.generation_type
@@ -45,6 +48,7 @@ class GridController < ApplicationController
     end
     mountain_amount = (dimensionx.to_i * dimensiony.to_i).floor / 150 + 1
     mountain(mountain_amount)
+    height
   end
 
   #Generates the mountain seed tiles.
@@ -60,7 +64,7 @@ class GridController < ApplicationController
 
   #Generates smaller mountains in a chain, iterating several times.
   def mountain_chain(tilex, tiley, count, terrain)
-    if count <= 6
+    (1..6).each do
       count += 1
       grid = Tile.where(x: tilex + randomIndex(0..1) * 2 - 1, y: tiley)
       grid.each do |chain|
@@ -72,7 +76,9 @@ class GridController < ApplicationController
           mountain = Tile.where(x: newx, y:newy)
           mountain.each do |mountain|
             mountain.terrain = terrain
-            mountain.height = 5
+            if mountain.height < 6
+              mountain.height = 5
+            end
             mountain.save
             newx += randomIndex(0..1)
             newy += ydirection
@@ -80,7 +86,29 @@ class GridController < ApplicationController
           end
         end
       end
-      mountain_chain(tilex, tiley, count, terrain)
+    end
+  end
+
+  #Generates the height for tiles based on their distance from a mountain with a one tile to one height ratio
+  #not entirely satisfied with this height generation, seems slow, and unnatural looking on map.  will revisit in future
+  def height
+    type = Terrain.where(generation_type: "mountain")
+    type.each do |cat|
+      grid = Tile.where(terrain: cat.terrain)
+      grid.each do |mountain|
+        (-4..4).each do |xpos|
+          (-4..4).each do |ypos|
+            tile = Tile.where(x: xpos + mountain.x, y: ypos + mountain.y)
+            tile.each do |height|
+              distance = (((xpos.abs) / 2).floor - 3).abs + (((ypos.abs) / 2).floor - 3).abs / 2
+              if distance > height.height
+                height.height = distance.abs
+                height.save
+              end
+            end
+          end
+        end
+      end
     end
   end
 
