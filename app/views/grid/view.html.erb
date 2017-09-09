@@ -13,9 +13,6 @@
       <%= f.submit %>
     </p>
 <% end %>
-<%= @check %>
-
-
 <!--Grabs grid information and then displays a hex grid with relevant info-->
 <div id="grid">
   <% count = 0 %>
@@ -28,13 +25,15 @@
       <% if tile.y%2.floor != 0 %>
           <div class="hexagon odd <%= tile.terrain %>">
             <div class="hex-text">
-              <%= tile.height %>
+              <%= tile.x %>
+              <%= tile.y %>
             </div>
           </div>
       <% else %>
           <div class="hexagon even <%= tile.terrain %>">
             <div class="hex-text">
-              <%= tile.height %>
+              <%= tile.x %>
+              <%= tile.y %>
             </div>
           </div>
       <% end %>
