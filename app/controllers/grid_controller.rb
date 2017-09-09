@@ -195,5 +195,17 @@ class GridController < ApplicationController
 
   #selects several random tiles from within and then changes their type to city.
   def city(city_occurrence)
+    #selects any terrain types that generate as a city and creates an array from them
+    type_select = Terrain.where(generation_type: 'city')
+    city_types = Array.new
+    type_select.each do |select|
+      city_types << select.terrain
+    end
+    #selects a tile and then changes it to a random city type
+    grid = Tile.order("RANDOM()").limit(city_occurrence)
+    grid.each do |city|
+      city.terrain = city_types.sample
+      city.save
+    end
   end
 end
