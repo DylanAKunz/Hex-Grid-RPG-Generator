@@ -20,14 +20,15 @@ class GridController < ApplicationController
   def generate(dimensionx, dimensiony)
     #Temporary location for creating the color of a tile based on its color in the database and writing it to a stylesheet.  In the future will allow for custom created tiles
     directory = 'app/assets/stylesheets/'
-    File.truncate(directory + 'grid.scss', 0)
-    File.open(File.join(directory, 'grid.scss'), 'w') do |f|
+    File.truncate(directory + 'grid_color.scss', 0)
+    File.open(File.join(directory, 'grid_color.scss'), 'w') do |f|
+      f.puts '/* Styles for the colors in the map grid */'
       Terrain.all.each do |terrain|
-        f.puts "." + terrain.terrain.to_s + "{"
-        f.puts 'background-color: #' + terrain.color.to_s
+        f.puts '.' + terrain.terrain.to_s + '{'
+        f.puts '  background-color: #' + terrain.color.to_s
         f.puts '}'
-        f.puts "." + terrain.terrain.to_s + ':hover{'
-        f.puts 'background-color: #' + terrain.hover.to_s
+        f.puts '.' + terrain.terrain.to_s + ':hover{'
+        f.puts '  background-color: #' + terrain.hover.to_s
         f.puts '}'
       end
      f.close
@@ -51,7 +52,7 @@ class GridController < ApplicationController
     river_occurrence = (dimensionx.to_i * dimensiony.to_i).floor / 150 + 1
     city_occurrence = (dimensionx.to_i * dimensiony.to_i).floor / 150 + 1
     mountain_chain(mountain_occurrence)
-    height()
+    height
     river_chain(river_occurrence)
     city(city_occurrence)
   end
@@ -97,7 +98,7 @@ class GridController < ApplicationController
   #Generates the height for tiles based on their distance from a mountain with a one tile to one height ratio
   #not entirely satisfied with this height generation, seems slow, and unnatural looking on map.  will revisit in future
   def height
-    type = Terrain.where(generation_type: "mountain")
+    type = Terrain.where(generation_type: 'mountain')
     type.each do |category|
       grid = Tile.where(terrain: category.terrain)
       grid.each do |mountain|
@@ -162,7 +163,7 @@ class GridController < ApplicationController
       else
         parity = 0
       end
-      #Assigns a range for determining wether or not a grid square is touching another based on the direction parameter.  0-3 is the grids on top as well as the sides with 2-5 being the sides and bottom.
+      #Assigns a range for determining whether or not a grid square is touching another based on the direction parameter.  0-3 is the grids on top as well as the sides with 2-5 being the sides and bottom.
       if direction == 0
         range = (0..3).to_a
       else
@@ -175,7 +176,7 @@ class GridController < ApplicationController
         tile = Tile.where(x: tile_x + check_x[0], y: tile_y + check_y[0])
         tile.each do |check|
           if check.terrain != type && check.height >= tile_height && check.x != tile_x || check.y != tile_y
-            valid >> check.id
+            valid << check.id
           end
         end
       end

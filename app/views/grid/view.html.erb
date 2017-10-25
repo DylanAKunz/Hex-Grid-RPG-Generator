@@ -1,42 +1,52 @@
-<!-- Get desired dimension for a new grid and submit it -->
-<%= form_for :dimension, method: 'get', url: root_path do |f| %>
 
-    <p>
-    <%= f.label :X %><br>
-    <%= f.number_field :dimensionx %>
-    </p>
-    <p>
-    <%= f.label :Y %><br>
-    <%= f.number_field :dimensiony %>
-    </p>
-    <p>
-      <%= f.submit %>
-    </p>
-<% end %>
-<!--Grabs grid information and then displays a hex grid with relevant info-->
-<div id="grid">
-  <% count = 0 %>
-  <div class="column">
-  <% Tile.all.each do |tile| %>
-      <% if count >= tile.y %>
-          </div><div class="column">
+<div class="container">
+  <div class="row">
+  <!--Grabs grid information and then displays a hex grid with relevant info-->
+    <div class="col-8">
+      <div id="grid">
+        <% count = 0 %>
+        <div class="column">
+        <% Tile.all.each do |tile| %>
+            <% if count >= tile.y %>
+        </div>
+        <div class="column">
+            <% end %>
+            <% count = tile.y %>
+            <% if tile.y%2.floor != 0 %>
+                <div class="hexagon odd <%= tile.terrain %>">
+                  <div class="hex-text">
+                    <%= tile.x %>
+                    <%= tile.y %>
+                  </div>
+                </div>
+            <% else %>
+                <div class="hexagon even <%= tile.terrain %>">
+                  <div class="hex-text">
+                    <%= tile.x %>
+                    <%= tile.y %>
+                  </div>
+                </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <!-- Get desired dimension for a new grid and submit it -->
+    <div class="col-4">
+      <%= form_for :dimension, method: 'get', url: root_path do |f| %>
+
+          <p>
+            <%= f.label :X %><br>
+            <%= f.number_field :dimensionx %>
+          </p>
+          <p>
+            <%= f.label :Y %><br>
+            <%= f.number_field :dimensiony %>
+          </p>
+          <p>
+            <%= f.submit %>
+          </p>
       <% end %>
-      <% count = tile.y %>
-      <% if tile.y%2.floor != 0 %>
-          <div class="hexagon odd <%= tile.terrain %>">
-            <div class="hex-text">
-              <%= tile.x %>
-              <%= tile.y %>
-            </div>
-          </div>
-      <% else %>
-          <div class="hexagon even <%= tile.terrain %>">
-            <div class="hex-text">
-              <%= tile.x %>
-              <%= tile.y %>
-            </div>
-          </div>
-      <% end %>
-  <% end %>
+    </div>
   </div>
 </div>

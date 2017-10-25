@@ -1,0 +1,25 @@
+/* Global styles for entire site*/
+.nav-bar{
+  background-color: #730E15;
+  width: 100%;
+  margin-bottom: 2em;
+  text-align: center;
+  .row{
+    padding-left: 5em;
+    padding-right: 5em;
+    :last-child{
+      border-right: 1px solid #FFFFFF;
+    }
+    .col{
+      padding: 1em;
+      display: inline-block;
+      list-style: none;
+      border-left: 1px solid #FFFFFF;
+      color: #FFFFFF;
+      text-decoration: none;
+      &:hover{
+        background-color: #620E15;
+      }
+    }
+  }
+}
