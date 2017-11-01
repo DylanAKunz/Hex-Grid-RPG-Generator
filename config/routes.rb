@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'grid/generate'
-
   get 'grid/view'
 
   root 'grid#view'
