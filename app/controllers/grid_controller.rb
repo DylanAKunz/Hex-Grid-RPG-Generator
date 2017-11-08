@@ -40,7 +40,7 @@ class GridController < ApplicationController
         grid = Tile.new
         grid.x = x
         grid.y = y
-        grid.name = Prefix.order("RANDOM()").first.prefix << Suffix.order("RANDOM()").first.suffix
+        grid.name = Prefix.order("RANDOM()").first.prefix << " " << Suffix.order("RANDOM()").first.suffix
         grid.terrain = Terrain.where(generation_type: 'plain').order("RANDOM()").first.terrain
         grid.affinity = Affinity.order("RANDOM()").first.affinity
         grid.height = 1
@@ -118,7 +118,7 @@ class GridController < ApplicationController
     end
   end
 
-  #Selects the different types of mountains and rivers then generates a seed tile for a river calling "river" to send the river towards either the top of the grid or the bottom of the grid.
+  #Selects the different types of mountains and river a river type then generates a seed tile for a river calling "river" to send the river towards either the top of the grid or the bottom of the grid.
   def river_chain(river_occurrence)
     (1..river_occurrence).each do
       mountain_select = Terrain.where(generation_type: 'mountain')

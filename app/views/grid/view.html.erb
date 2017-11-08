@@ -13,14 +13,14 @@
             <% end %>
             <% count = tile.y %>
             <% if tile.y%2.floor != 0 %>
-                <div class="hexagon odd <%= tile.terrain %>" onClick="tileInfo(<%= "'#{tile.name}', '#{tile.terrain}', '#{tile.affinity}', '#{tile.height}', '#{tile.threat}'" %>)">
+                <div class="hexagon odd <%= tile.terrain %>" onClick="tileInfoSidebar(<%= "'#{tile.name}', '#{tile.terrain}', '#{tile.affinity}', '#{tile.height}', '#{tile.threat}'" %>)">
                   <div class="hex-text">
                     <%= tile.x %>
                     <%= tile.y %>
                   </div>
                 </div>
             <% else %>
-                <div class="hexagon even <%= tile.terrain %>" onClick="tileInfo(<%= "'#{tile.name}', '#{tile.terrain}', '#{tile.affinity}', '#{tile.height}', '#{tile.threat}'" %>)">
+                <div class="hexagon even <%= tile.terrain %>" onClick="tileInfoSidebar(<%= "'#{tile.name}', '#{tile.terrain}', '#{tile.affinity}', '#{tile.height}', '#{tile.threat}'" %>)">
                   <div class="hex-text">
                     <%= tile.x %>
                     <%= tile.y %>
@@ -33,7 +33,7 @@
     </div>
     <!-- Get desired dimension for a new grid and submit it -->
     <div class="col-4 secondary-panel">
-      <div class="generate">
+      <div ID="generate" class="sidebar">
         <%= form_for :dimension, method: 'get', url: root_path do |f| %>
 
             <p>
@@ -49,7 +49,7 @@
             </p>
         <% end %>
       </div>
-      <div class="hidden" id="infoDisplay">
+      <div class="sidebar hidden" id="infoDisplay">
         <ul id="infoList">
         </ul>
       </div>
